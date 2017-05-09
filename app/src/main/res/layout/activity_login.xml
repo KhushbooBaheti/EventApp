@@ -114,14 +114,15 @@
 
 
                     <EditText
-                        android:id="@+id/rollno"
+                        android:id="@+id/username"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/LOGIN"
                         android:layout_marginBottom="5dp"
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="5dp"
-                        android:hint="ID"
+
+                        android:hint="USER-NAME"
                         android:inputType="textPersonName"
                         android:textColor="#000000"
                         android:textSize="15dp" />
