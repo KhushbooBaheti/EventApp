@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">EventApp</string>
+    <string name="organiser">Organiser</string>
+    <string name="user">User</string>
+    <string name="volunteer">Volunteer</string>
+    <string name="eventAppSignUpLine">New to EventApp?</string>
+</resources>
