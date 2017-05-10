@@ -56,7 +56,7 @@
                         android:background="?attr/selectableItemBackgroundBorderless"
                         android:backgroundTintMode="add"
                         android:padding="3dp"
-                        android:text="SIGN UP"
+                        android:text=""
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
 
                         />
@@ -77,14 +77,14 @@
                         android:textSize="15dp" />
 
                     <EditText
-                        android:id="@+id/rollno"
+                        android:id="@+id/username"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/name"
                         android:layout_marginBottom="5dp"
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="5dp"
-                        android:hint="YOUR ID"
+                        android:hint="YOUR USERNAME"
                         android:inputType="textPersonName"
                         android:textColor="#000000"
                         android:textSize="15dp" />
@@ -93,7 +93,7 @@
                         android:id="@+id/mobile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/rollno"
+                        android:layout_below="@+id/username"
                         android:layout_marginBottom="5dp"
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="5dp"
