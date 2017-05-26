@@ -150,7 +150,7 @@
                 android:layout_below="@id/login"
                 android:layout_centerHorizontal="true"
                 android:layout_margin="25dp"
-                android:background="@color/colorPrimaryDark"
+                android:background="@drawable/bg_button"
                 android:text="LOGIN"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                 android:textColor="#FFFFFF" />
@@ -167,12 +167,13 @@
 
             <Button
                 android:id="@+id/buttonsignup"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/newtext"
                 android:layout_centerHorizontal="true"
                 android:layout_margin="16dp"
-                android:background="@color/colorPrimaryDark"
+                android:background="@drawable/bg_button"
                 android:onClick="signup"
                 android:text="SIGN UP"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"

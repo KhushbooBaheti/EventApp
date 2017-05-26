@@ -1,4 +1,4 @@
-package com.example.user.eventapp.basic;
+package com.example.user.eventapp.java_models;
 
 import java.util.Date;
 
@@ -11,9 +11,28 @@ public class Conference {
     private String confName;
     private Date confDate;
     private String confDescription;
+    private String schedule;
+    private String Speakers;
+
 
     public int getConfId() {
         return confId;
+    }
+
+    public String getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(String schedule) {
+        this.schedule = schedule;
+    }
+
+    public String getSpeakers() {
+        return Speakers;
+    }
+
+    public void setSpeakers(String speakers) {
+        Speakers = speakers;
     }
 
     public void setConfId(int confId) {

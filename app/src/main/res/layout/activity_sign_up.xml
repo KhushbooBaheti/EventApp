@@ -58,7 +58,6 @@
                         android:padding="3dp"
                         android:text=""
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-
                         />
 
 
@@ -137,7 +136,7 @@
                 android:layout_below="@id/signup"
                 android:layout_centerHorizontal="true"
                 android:layout_margin="25dp"
-                android:background="@color/colorPrimaryDark"
+                android:background="@drawable/bg_button"
                 android:text="SIGN UP"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                 android:textColor="#FFFFFF"
