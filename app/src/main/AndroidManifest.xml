@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.user.eventapp">
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -9,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".basic.UserActivity">
+        <activity android:name=".basic.SignUpActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,9 +18,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".basic.LoginActivity" />
-        <activity android:name=".basic.SignUpActivity" />
+        <activity android:name=".basic.UserActivity" />
         <activity android:name=".basic.LogoutActivity" />
-        <activity android:name=".basic.MainActivity"></activity>
+        <activity android:name=".basic.MainActivity" />
+        <activity android:name=".basic.ListOfConfActivity"></activity>
     </application>
 
 </manifest>

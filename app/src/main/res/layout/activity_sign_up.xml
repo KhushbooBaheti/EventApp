@@ -27,6 +27,15 @@
                 android:layout_marginTop="50dp"
                 android:src="@drawable/login_logo" />
 
+            <TextView
+                android:id="@+id/errortext"
+                android:layout_below="@id/key"
+                android:layout_marginTop="40dp"
+                android:text="ERROR"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
             <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/signup"
                 android:layout_width="match_parent"
@@ -75,24 +84,13 @@
                         android:textColor="#000000"
                         android:textSize="15dp" />
 
-                    <EditText
-                        android:id="@+id/username"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/name"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginTop="5dp"
-                        android:hint="YOUR USERNAME"
-                        android:inputType="textPersonName"
-                        android:textColor="#000000"
-                        android:textSize="15dp" />
+
 
                     <EditText
                         android:id="@+id/mobile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/username"
+                        android:layout_below="@id/name"
                         android:layout_marginBottom="5dp"
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="5dp"
@@ -100,32 +98,45 @@
                         android:inputType="phone"
                         android:textColor="#000000"
                         android:textSize="15dp" />
+                    <EditText
+                        android:id="@+id/email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/mobile"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="5dp"
+                        android:hint="EMAIL"
+                        android:inputType="textEmailAddress"
+                        android:textColor="#000000"
+                        android:textSize="15dp" />
+
+                    <EditText
+                        android:id="@+id/specialization"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/email"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="5dp"
+                        android:hint="SPECIALIZATION"
+                        android:inputType="text"
+                        android:textColor="#000000"
+                        android:textSize="15dp" />
 
                     <EditText
                         android:id="@+id/password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/mobile"
+                        android:layout_below="@id/specialization"
                         android:layout_marginBottom="5dp"
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="5dp"
-                        android:hint="CHOOSE A PASSWORD"
+                        android:hint="PASSWORD"
                         android:inputType="textPassword"
                         android:textColor="#000000"
                         android:textSize="15dp" />
 
-                    <EditText
-                        android:id="@+id/password_confirm"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/password"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginTop="5dp"
-                        android:hint="CONFIRM YOUR PASSWORD"
-                        android:inputType="textPassword"
-                        android:textColor="#000000"
-                        android:textSize="15dp" />
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
 

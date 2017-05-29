@@ -16,8 +16,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.user.eventapp.R;
-import com.example.user.eventapp.fragments.ListConfFragment;
 import com.example.user.eventapp.fragments.PaperStatus;
+import com.example.user.eventapp.fragments.PartRegFragment;
 import com.example.user.eventapp.fragments.ProfileFragment;
 import com.example.user.eventapp.fragments.RegisteredConfFragment;
 
@@ -158,12 +158,11 @@ public class UserActivity extends AppCompatActivity {
         switch (navItemIndex) {
             case 0:
                 // home
-                ProfileFragment profileFragment = new ProfileFragment();
+                PartRegFragment profileFragment=new PartRegFragment();
                 return profileFragment;
             case 1:
                 // photos
-                ListConfFragment listConfFragment = new ListConfFragment();
-                return listConfFragment;
+
             case 2:
                 // movies fragment
                 RegisteredConfFragment registeredConfFragment = new RegisteredConfFragment();
@@ -203,9 +202,9 @@ public class UserActivity extends AppCompatActivity {
                         CURRENT_TAG = TAG_PROFILE;
                         break;
                     case R.id.nav_list_of_conf:
-                        navItemIndex = 1;
-                        CURRENT_TAG = TAG_LIST_OF_CONF;
-                        break;
+                        startActivity(new Intent(UserActivity.this, ListOfConfActivity.class));
+                        drawer.closeDrawers();
+                        return true;
                     case R.id.nav_registered_conf:
                         navItemIndex = 2;
                         CURRENT_TAG = TAG_REGISTERED_CONF;

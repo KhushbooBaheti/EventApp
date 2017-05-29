@@ -1,0 +1,15 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_list_of_conf"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#EFEBE9"
+
+    >
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_list_conf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    </RelativeLayout>
