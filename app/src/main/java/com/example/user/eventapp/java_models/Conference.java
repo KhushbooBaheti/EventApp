@@ -8,38 +8,38 @@ import java.util.Date;
 
 public class Conference {
     private int confId;
-    private String confName;
+    private String confTopic;
     private Date confDate;
     private String venue;
     private String confChair;
     private int days;
     private int feesList;
     private int feesPart;
-    private String confDescription;
+    private String confAbout;
     private String schedule;
     private int imageId;
 
 
     public Conference(int id,String name,Date date){
         confId=id;
-        confName=name;
+        confTopic=name;
         confDate=date;
 
     }
-    public Conference(int id,String name,Date date,
+    public Conference(int id,String topic,Date date,
                       String venue,String confChair,
                       int days,int feesList,int feesPart,
-                      String confDescription,String schedule,int imageId){
+                      String confAbout,String schedule,int imageId){
 
         confId=id;
-        confName=name;
+        confTopic=topic;
         confDate=date;
         this.venue=venue;
         this.confChair=confChair;
         this.days=days;
         this.feesList=feesList;
         this.feesPart=feesPart;
-        this.confDescription=confDescription;
+        this.confAbout=confAbout;
         this.schedule=schedule;
         this.imageId=imageId;
     }
@@ -62,16 +62,16 @@ public class Conference {
         this.confId = confId;
     }
 
-    public void setConfName(String confName) {
-        this.confName = confName;
+    public void setConfName(String confTopic) {
+        this.confTopic = confTopic;
     }
 
     public void setConfDate(Date confDate) {
         this.confDate = confDate;
     }
 
-    public void setConfDescription(String confDescription) {
-        this.confDescription = confDescription;
+    public void setConfDescription(String confAbout) {
+        this.confAbout = confAbout;
     }
 
     public String getVenue() {
@@ -124,7 +124,7 @@ public class Conference {
 
     public String getConfName() {
 
-        return confName;
+        return confTopic;
 
     }
 
@@ -133,6 +133,6 @@ public class Conference {
     }
 
     public String getConfDescription() {
-        return confDescription;
+        return confAbout;
     }
 }

@@ -2,7 +2,6 @@ package com.example.user.eventapp.Utilties;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -25,7 +24,7 @@ public class backGroundWorker extends AsyncTask<String,Void,String> {
 
     String type1;
     Context context;
-    AlertDialog alertDialog;
+
     public backGroundWorker (Context ctx) {
         context = ctx;
     }
@@ -34,6 +33,7 @@ public class backGroundWorker extends AsyncTask<String,Void,String> {
         type1 = params[0];
         String login_url = "http://eventapp.000webhostapp.com/login.php";
         String signup_url = "http://eventapp.000webhostapp.com/signup.php";
+        String conference_data_fetch_url = "http://eventapp.000webhostapp.com/conference_list.php";
         if(type1.equals("login")) {
             try {
                 String name = params[1];
@@ -113,13 +113,13 @@ public class backGroundWorker extends AsyncTask<String,Void,String> {
             }
 
         }
+
         return null;
     }
 
     @Override
     protected void onPreExecute() {
-     /*alertDialog = new AlertDialog.Builder(context).create();
-        alertDialog.setTitle( type1+"Status");*/
+
     }
 
     @Override

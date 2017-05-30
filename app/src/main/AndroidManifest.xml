@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".basic.LoginActivity">
+        <activity android:name=".basic.ListOfConfActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,7 +21,7 @@
         <activity android:name=".basic.UserActivity" />
         <activity android:name=".basic.LogoutActivity" />
         <activity android:name=".basic.MainActivity" />
-        <activity android:name=".basic.ListOfConfActivity"></activity>
+        <activity android:name=".basic.LoginActivity"></activity>
     </application>
 
 </manifest>

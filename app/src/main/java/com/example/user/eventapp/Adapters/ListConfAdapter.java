@@ -1,11 +1,18 @@
 package com.example.user.eventapp.Adapters;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.user.eventapp.R;
+import com.example.user.eventapp.java_models.Conference;
+
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 
 /**
@@ -14,12 +21,19 @@ import com.example.user.eventapp.R;
 
 public class ListConfAdapter extends RecyclerView.Adapter<ListConfAdapter.MyViewHolder> {
 
+    ArrayList<Conference> conferenceList;
+
+    public  ListConfAdapter(ArrayList<Conference> conferenceList){
+        this.conferenceList=conferenceList;
+    }
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         public TextView confName, venue, startDate;
+        public ImageView image;
 
         public MyViewHolder(View view) {
             super(view);
+            image=(ImageView) view.findViewById(R.id.iv_conf);
             confName=(TextView) view.findViewById(R.id.tv_conf_name);
             venue=(TextView) view.findViewById(R.id.tv_venue);
             startDate=(TextView) view.findViewById(R.id.tv_start_date);
@@ -29,16 +43,27 @@ public class ListConfAdapter extends RecyclerView.Adapter<ListConfAdapter.MyView
     }
     @Override
     public ListConfAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_conf_row, parent, false);
+        return new ListConfAdapter.MyViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(ListConfAdapter.MyViewHolder holder, int position) {
+        final Conference conf=conferenceList.get(position);
+
+        holder.confName.setText(conf.getConfName());
+        holder.venue.setText(conf.getVenue());
+
+        Format formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String s = formatter.format(conf.getConfDate());
+        holder.startDate.setText(s);
+        holder.image.setImageResource(conf.getImageId());
+
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return conferenceList.size();
     }
 }
