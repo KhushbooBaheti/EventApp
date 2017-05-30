@@ -114,15 +114,14 @@
 
 
                     <EditText
-                        android:id="@+id/username"
+                        android:id="@+id/uname"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/LOGIN"
                         android:layout_marginBottom="5dp"
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="5dp"
-
-                        android:hint="USER-NAME"
+                        android:hint="NAME"
                         android:inputType="textPersonName"
                         android:textColor="#000000"
                         android:textSize="15dp" />
@@ -144,7 +143,7 @@
 
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/buttonLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/login"
@@ -159,7 +158,7 @@
                 android:id="@+id/newtext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/button"
+                android:layout_below="@id/buttonLogin"
                 android:layout_centerHorizontal="true"
                 android:text="@string/eventAppSignUpLine"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"

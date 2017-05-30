@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.example.user.eventapp.R;
 import com.example.user.eventapp.Utilties.backGroundWorker;
@@ -37,7 +36,7 @@ public class SignUpActivity extends Activity {
     EditText inputEmail;
     EditText inputPassword;
     Button btnRegister;
-    TextView registerErrorMsg;
+
 
 
     @Override
