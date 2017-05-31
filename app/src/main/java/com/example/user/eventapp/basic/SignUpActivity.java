@@ -62,7 +62,7 @@ public class SignUpActivity extends Activity {
                     String email = inputEmail.getText().toString();
                     String specialization=inputSpecialization.getText().toString();
                     String type = "signup";
-                    backGroundWorker backgroundWorker = new backGroundWorker(getApplicationContext());
+                    backGroundWorker backgroundWorker = new backGroundWorker(getApplicationContext(),SignUpActivity.this);
                     backgroundWorker.execute(type, name,mobile_no,specialization,email,password);
                 }
             }

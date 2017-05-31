@@ -7,9 +7,12 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Toast;
 
 import com.example.user.eventapp.Adapters.ListConfAdapter;
 import com.example.user.eventapp.R;
+import com.example.user.eventapp.Utilties.RecyclerTouchListener;
 import com.example.user.eventapp.java_models.Conference;
 
 import org.json.JSONArray;
@@ -69,9 +72,29 @@ public class ListOfConfActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(oLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
+
         conferenceList=new ArrayList<Conference>();
         prepareImages();
         getData();
+        recyclerView.addOnItemTouchListener(
+                new RecyclerTouchListener(getApplicationContext(), recyclerView ,new RecyclerTouchListener.OnItemClickListener() {
+                    @Override
+                    public void onClick(View view, int position) {
+                        Conference conf = conferenceList.get(position);
+                        Toast.makeText(getApplicationContext(),conf.getConfName(),Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    @Override
+                    public void onLongClick(View view, int position) {
+                        Conference conf = conferenceList.get(position);
+                        Toast.makeText(getApplicationContext(),conf.getConfName(),Toast.LENGTH_SHORT).show();
+
+                    }
+
+
+                })
+        );
     }
 
     public void getData(){
@@ -159,4 +182,6 @@ public class ListOfConfActivity extends AppCompatActivity {
                 R.drawable.isec
 
     };}
+
+
 }

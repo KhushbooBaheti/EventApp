@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
                 String type = "login";
-                backGroundWorker backgroundWorker = new backGroundWorker(getApplicationContext());
+                backGroundWorker backgroundWorker = new backGroundWorker(getApplicationContext(),LoginActivity.this);
                 backgroundWorker.execute(type, uname,upassword,category);
             }
         });

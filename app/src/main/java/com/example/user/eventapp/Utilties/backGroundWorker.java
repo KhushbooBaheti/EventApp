@@ -1,8 +1,13 @@
 package com.example.user.eventapp.Utilties;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.widget.Toast;
+
+import com.example.user.eventapp.basic.UserActivity;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -22,11 +27,13 @@ import java.net.URLEncoder;
 
 public class backGroundWorker extends AsyncTask<String,Void,String> {
 
-    String type1;
+    String type1,name,category;
     Context context;
+    Activity activity;
 
-    public backGroundWorker (Context ctx) {
+    public backGroundWorker (Context ctx,Activity act) {
         context = ctx;
+        activity = act;
     }
     @Override
     protected String doInBackground(String... params) {
@@ -36,9 +43,9 @@ public class backGroundWorker extends AsyncTask<String,Void,String> {
         String conference_data_fetch_url = "http://eventapp.000webhostapp.com/conference_list.php";
         if(type1.equals("login")) {
             try {
-                String name = params[1];
+                 name = params[1];
                 String password = params[2];
-                String category = params[3];
+                 category = params[3];
                 URL url = new URL(login_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
@@ -124,8 +131,22 @@ public class backGroundWorker extends AsyncTask<String,Void,String> {
 
     @Override
     protected void onPostExecute(String result) {
-        Toast.makeText(context,result,Toast.LENGTH_LONG).show();
+        Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+        if (result.equals("login success !!!!! Welcome user")) {
+            SharedPreferences sharedPreferences = context.getSharedPreferences("loggedIn info", Context.MODE_PRIVATE);
+            final SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("name", name);
+            editor.putString("category", category);
+            editor.commit();
 
+            Intent intent = new Intent(context, UserActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+            activity.finish();
+        }
+        else if(result.equals("login not success,name,password or category not valid")){
+
+        }
     }
 
     @Override

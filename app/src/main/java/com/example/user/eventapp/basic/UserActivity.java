@@ -1,6 +1,8 @@
 package com.example.user.eventapp.basic;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
@@ -17,7 +19,6 @@ import android.widget.TextView;
 
 import com.example.user.eventapp.R;
 import com.example.user.eventapp.fragments.PaperStatus;
-import com.example.user.eventapp.fragments.PartRegFragment;
 import com.example.user.eventapp.fragments.ProfileFragment;
 import com.example.user.eventapp.fragments.RegisteredConfFragment;
 
@@ -45,6 +46,8 @@ public class UserActivity extends AppCompatActivity {
     // flag to load home fragment when user presses back key
     private boolean shouldLoadHomeFragOnBackPress = true;
     private Handler mHandler;
+    String name;
+    String category;
 
 
     @Override
@@ -98,9 +101,12 @@ public class UserActivity extends AppCompatActivity {
     }
 
     private void loadNavHeader() {
-        // name, website
-        txtName.setText("Khushboo Baheti");
-        txtWebsite.setText("www.khushboo.info");
+        SharedPreferences shared=getSharedPreferences("loggedIn info", Context.MODE_PRIVATE);
+        name=shared.getString("name","");
+        category=shared.getString("category","");
+        txtName.setText(name);
+        txtWebsite.setText(category);
+
     }
 
     /***
@@ -158,7 +164,7 @@ public class UserActivity extends AppCompatActivity {
         switch (navItemIndex) {
             case 0:
                 // home
-                PartRegFragment profileFragment=new PartRegFragment();
+                ProfileFragment profileFragment=new ProfileFragment();
                 return profileFragment;
             case 1:
                 // photos
@@ -215,10 +221,14 @@ public class UserActivity extends AppCompatActivity {
                         break;
 
                     case R.id.nav_logout:
-                        // launch new intent instead of loading fragment
-                        startActivity(new Intent(UserActivity.this, LogoutActivity.class));
+                        SharedPreferences sharedPreferences = getSharedPreferences("loggedIn info", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("name", "");
+                        editor.apply();
+                        startActivity(new Intent(UserActivity.this, LoginActivity.class));
                         drawer.closeDrawers();
-                        return true;
+                        finish();
+                        break;
 
                     default:
                         navItemIndex = 0;
