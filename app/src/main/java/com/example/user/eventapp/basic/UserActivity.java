@@ -47,7 +47,7 @@ public class UserActivity extends AppCompatActivity {
     private boolean shouldLoadHomeFragOnBackPress = true;
     private Handler mHandler;
     String name;
-    String category;
+    String category,uid;
 
 
     @Override
@@ -69,6 +69,10 @@ public class UserActivity extends AppCompatActivity {
 
         // load toolbar titles from string resources
         activityTitles = getResources().getStringArray(R.array.nav_item_activity_titles);
+        SharedPreferences shared=getSharedPreferences("loggedIn info", Context.MODE_PRIVATE);
+        name=shared.getString("name","");
+        category=shared.getString("category","");
+        uid=shared.getString("uid","");
 
         // load nav menu header data
         loadNavHeader();
@@ -101,9 +105,7 @@ public class UserActivity extends AppCompatActivity {
     }
 
     private void loadNavHeader() {
-        SharedPreferences shared=getSharedPreferences("loggedIn info", Context.MODE_PRIVATE);
-        name=shared.getString("name","");
-        category=shared.getString("category","");
+
         txtName.setText(name);
         txtWebsite.setText(category);
 
@@ -280,6 +282,9 @@ public class UserActivity extends AppCompatActivity {
         }
 
         super.onBackPressed();
+    }
+    public String getUid(){
+        return uid;
     }
 
 }

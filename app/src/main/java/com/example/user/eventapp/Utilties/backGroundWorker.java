@@ -132,20 +132,24 @@ public class backGroundWorker extends AsyncTask<String,Void,String> {
     @Override
     protected void onPostExecute(String result) {
         Toast.makeText(context, result, Toast.LENGTH_LONG).show();
-        if (result.equals("login success !!!!! Welcome user")) {
+
+       // int uid=Integer.parseInt(result);
+
+        if(result.equals("login not success,name,password or category not valid")){
+
+        }
+        else{
             SharedPreferences sharedPreferences = context.getSharedPreferences("loggedIn info", Context.MODE_PRIVATE);
             final SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString("name", name);
             editor.putString("category", category);
+            editor.putString("uid",result);
             editor.commit();
 
             Intent intent = new Intent(context, UserActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
             activity.finish();
-        }
-        else if(result.equals("login not success,name,password or category not valid")){
-
         }
     }
 
