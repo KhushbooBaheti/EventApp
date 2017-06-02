@@ -40,8 +40,8 @@ public class backGroundWorker extends AsyncTask<String,Void,String> {
         type1 = params[0];
         String login_url = "http://eventapp.000webhostapp.com/login.php";
         String signup_url = "http://eventapp.000webhostapp.com/signup.php";
-        String conference_data_fetch_url = "http://eventapp.000webhostapp.com/conference_list.php";
-        if(type1.equals("login")) {
+        String change_password_url = "http://eventapp.000webhostapp.com/changePassword.php";
+                if(type1.equals("login")) {
             try {
                  name = params[1];
                 String password = params[2];
@@ -120,6 +120,47 @@ public class backGroundWorker extends AsyncTask<String,Void,String> {
             }
 
         }
+                else if(type1.equals("changepassword")){
+                    HttpURLConnection httpURLConnection=null;
+                    try {
+                        String uid = params[1];
+                        String password = params[2];
+                        int UID=Integer.parseInt(uid);
+
+                        URL url = new URL(change_password_url);
+                         httpURLConnection = (HttpURLConnection)url.openConnection();
+                        httpURLConnection.setRequestMethod("POST");
+                        httpURLConnection.setDoOutput(true);
+                        httpURLConnection.setDoInput(true);
+                        OutputStream outputStream = httpURLConnection.getOutputStream();
+                        BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                        String post_data = URLEncoder.encode("uid","UTF-8")+"="+URLEncoder.encode(String.valueOf(UID),"UTF-8")+"&"
+                                +URLEncoder.encode("password","UTF-8")+"="+URLEncoder.encode(password,"UTF-8");
+                        bufferedWriter.write(post_data);
+                        bufferedWriter.flush();
+                        bufferedWriter.close();
+                        outputStream.close();
+                        InputStream inputStream = httpURLConnection.getInputStream();
+                        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"iso-8859-1"));
+                        String result="";
+                        String line="";
+                        while((line = bufferedReader.readLine())!= null) {
+                            result += line;
+                        }
+                        bufferedReader.close();
+                        inputStream.close();
+                        httpURLConnection.disconnect();
+                        return result;
+
+                    }
+                    catch(Exception e){
+                        e.printStackTrace();
+                    }
+                    finally {
+                        httpURLConnection.disconnect();
+                    }
+
+                }
 
         return null;
     }
@@ -136,6 +177,12 @@ public class backGroundWorker extends AsyncTask<String,Void,String> {
        // int uid=Integer.parseInt(result);
 
         if(result.equals("login not success,name,password or category not valid")){
+           /* Intent intent =new Intent(context, LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+            activity.finish();*/
+        }
+        if(result.equals("password successfully changed")){
 
         }
         else{

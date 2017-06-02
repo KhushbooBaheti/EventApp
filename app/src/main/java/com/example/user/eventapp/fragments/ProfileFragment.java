@@ -1,17 +1,21 @@
 package com.example.user.eventapp.fragments;
 
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.user.eventapp.R;
+import com.example.user.eventapp.Utilties.backGroundWorker;
 import com.example.user.eventapp.basic.UserActivity;
 
 import org.json.JSONArray;
@@ -51,6 +55,23 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         uid=((UserActivity)getActivity()).getUid();
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        View v=inflater.inflate(R.layout.fragment_profile, container, false);
+
+        Name=(TextView)v.findViewById(R.id.Name);
+        Email=(TextView)v.findViewById(R.id.Email);
+        Mobile=(TextView)v.findViewById(R.id.Mobile);
+        Specialization=(TextView)v.findViewById(R.id.Spec);
+
+        ChangePassword=(Button)v.findViewById(R.id.change_password);
+        EditDetails=(Button)v.findViewById(R.id.edit_details);
+
         class GetDataJSON extends AsyncTask<String, Void, String> {
 
             HttpURLConnection httpURLConnection;
@@ -85,7 +106,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
                     e.printStackTrace();
                 }
                 finally {
-                    //httpURLConnection.disconnect();
+                   // httpURLConnection.disconnect();
                 }
                 return result.toString();
             }
@@ -102,26 +123,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
 
 
 
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-        View v=inflater.inflate(R.layout.fragment_profile, container, false);
-
-        Name=(TextView)v.findViewById(R.id.Name);
-        Email=(TextView)v.findViewById(R.id.Email);
-        Mobile=(TextView)v.findViewById(R.id.Mobile);
-        Specialization=(TextView)v.findViewById(R.id.Spec);
-
-        ChangePassword=(Button)v.findViewById(R.id.change_password);
-        EditDetails=(Button)v.findViewById(R.id.edit_details);
 
 
 
 
-                return v;
+        return v;
 
 
     }
@@ -138,7 +144,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.change_password:
-                Toast.makeText(getActivity(),"Paid.....",Toast.LENGTH_LONG).show();
+               getChangePassDailog();
                 break;
             case R.id.edit_details:
                 Toast.makeText(getActivity(),"Paid.....",Toast.LENGTH_SHORT).show();
@@ -176,5 +182,33 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
             e.printStackTrace();
         }
 
+    }
+    void getChangePassDailog(){
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.alert_change_password, null);
+        dialogBuilder.setView(dialogView);
+
+        final EditText edt = (EditText) dialogView.findViewById(R.id.new_password);
+
+        dialogBuilder.setTitle("Change Password");
+        dialogBuilder.setMessage("Enter new password:");
+        dialogBuilder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                String password=edt.getText().toString();
+                String type = "changepassword";
+                backGroundWorker backgroundWorker = new backGroundWorker(getContext(),getActivity());
+                backgroundWorker.execute(type,uid,password);
+                dialog.dismiss();
+
+            }
+        });
+        dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog b = dialogBuilder.create();
+        b.show();
     }
 }

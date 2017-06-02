@@ -7,7 +7,7 @@
                 android:width="1dp"
                 android:color="#222222" />
             <corners
-                android:radius="7dp" />
+                android:radius="1000dp" />
             <padding
                 android:left="10dp"
                 android:top="10dp"
@@ -25,7 +25,7 @@
                 android:width="1dp"
                 android:color="#3F51B5" />
             <corners
-                android:radius="7dp" />
+                android:radius="1000dp" />
             <padding
                 android:left="10dp"
                 android:top="10dp"
