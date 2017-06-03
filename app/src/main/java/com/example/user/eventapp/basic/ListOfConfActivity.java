@@ -1,5 +1,7 @@
 package com.example.user.eventapp.basic;
 
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +9,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Toast;
 
@@ -64,6 +67,17 @@ public class ListOfConfActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_of_conf);
+        Toolbar tootlbar = (Toolbar) findViewById(R.id.mToolbar);
+        tootlbar.setTitle("Conferences");
+        tootlbar.setTitleTextColor(getResources().getColor(R.color.white));
+        setSupportActionBar(tootlbar);
+        final Drawable upArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_material);
+        upArrow.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
+        getSupportActionBar().setHomeAsUpIndicator(upArrow);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+
 
         cardview = (CardView) findViewById(R.id.card_view_list_conf);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_list_conf);
@@ -176,7 +190,11 @@ public class ListOfConfActivity extends AppCompatActivity {
         }
 
     }
-
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 
 
 }
