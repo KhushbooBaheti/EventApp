@@ -1,5 +1,6 @@
 package com.example.user.eventapp.Adapters;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.user.eventapp.R;
 import com.example.user.eventapp.java_models.Conference;
 
@@ -22,9 +25,11 @@ import java.util.ArrayList;
 public class ListConfAdapter extends RecyclerView.Adapter<ListConfAdapter.MyViewHolder> {
 
     ArrayList<Conference> conferenceList;
+    Context mContext;
 
-    public  ListConfAdapter(ArrayList<Conference> conferenceList){
+    public  ListConfAdapter(Context mContext,ArrayList<Conference> conferenceList){
         this.conferenceList=conferenceList;
+        this.mContext=mContext;
     }
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -57,7 +62,12 @@ public class ListConfAdapter extends RecyclerView.Adapter<ListConfAdapter.MyView
         Format formatter = new SimpleDateFormat("yyyy-MM-dd");
         String s = formatter.format(conf.getConfDate());
         holder.startDate.setText(s);
-        holder.image.setImageResource(conf.getImageId());
+
+        Glide.with(mContext).load(conf.getImageURL())
+                .thumbnail(0.5f)
+                .crossFade()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(holder.image);
 
 
     }

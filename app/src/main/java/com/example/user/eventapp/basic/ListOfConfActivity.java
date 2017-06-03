@@ -48,7 +48,7 @@ public class ListOfConfActivity extends AppCompatActivity {
     private static final String TAG_DAYS ="days";
     private static final String TAG_FEESLIST="fees_list";
     private static final String TAG_FEESPART="fees_part";
-    private static final String TAG_IMAGEID ="imageId";
+    private static final String TAG_IMAGEURL ="imageURL";
 
 
     JSONArray conferences = null;
@@ -74,7 +74,7 @@ public class ListOfConfActivity extends AppCompatActivity {
 
 
         conferenceList=new ArrayList<Conference>();
-        prepareImages();
+
         getData();
         recyclerView.addOnItemTouchListener(
                 new RecyclerTouchListener(getApplicationContext(), recyclerView ,new RecyclerTouchListener.OnItemClickListener() {
@@ -157,14 +157,14 @@ public class ListOfConfActivity extends AppCompatActivity {
                 int days = Integer.parseInt(c.getString(TAG_DAYS));
                 int fees_list = Integer.parseInt(c.getString(TAG_FEESLIST));
                 int fees_part = Integer.parseInt(c.getString(TAG_FEESPART));
-                int imageId = Integer.parseInt(c.getString(TAG_IMAGEID));
+                String imageURL = c.getString(TAG_IMAGEURL);
 
-                Conference conf=new Conference(id,topic,date,venue,confchair,days,fees_list,fees_part,about,schedule,images[imageId]);
+                Conference conf=new Conference(id,topic,date,venue,confchair,days,fees_list,fees_part,about,schedule,imageURL);
 
 
                 conferenceList.add(conf);
             }
-            ListConfAdapter listConfAdapter = new ListConfAdapter(conferenceList);
+            ListConfAdapter listConfAdapter = new ListConfAdapter(getApplicationContext(),conferenceList);
             recyclerView.setAdapter(listConfAdapter);
 
 
@@ -176,12 +176,7 @@ public class ListOfConfActivity extends AppCompatActivity {
         }
 
     }
-    public void prepareImages(){
-         images = new int[]{
-                R.drawable.icacci,
-                R.drawable.isec
 
-    };}
 
 
 }

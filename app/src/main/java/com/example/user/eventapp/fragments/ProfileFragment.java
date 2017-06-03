@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.user.eventapp.R;
 import com.example.user.eventapp.Utilties.backGroundWorker;
@@ -36,12 +35,13 @@ import java.net.URLEncoder;
 
 public class ProfileFragment extends Fragment implements View.OnClickListener{
 
-    TextView Name,Email,Mobile,Specialization;
+    TextView Name,Email,Mobile,Specialization,Category;
     Button ChangePassword,EditDetails;
     String Profile_url="http://eventapp.000webhostapp.com/profile.php";
     String myJSON;
     JSONArray user;
     String name,email,specialization,category,uid,mobile;
+
 
 
     public ProfileFragment() {
@@ -68,7 +68,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         Email=(TextView)v.findViewById(R.id.Email);
         Mobile=(TextView)v.findViewById(R.id.Mobile);
         Specialization=(TextView)v.findViewById(R.id.Spec);
-
+        Category=(TextView)v.findViewById(R.id.Category);
         ChangePassword=(Button)v.findViewById(R.id.change_password);
         EditDetails=(Button)v.findViewById(R.id.edit_details);
 
@@ -147,7 +147,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
                getChangePassDailog();
                 break;
             case R.id.edit_details:
-                Toast.makeText(getActivity(),"Paid.....",Toast.LENGTH_SHORT).show();
+                getEditDetailsDailog();
                 break;
 
             default:
@@ -171,6 +171,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
                 Mobile.setText(mobile);
                 Email.setText(email);
                 Specialization.setText(specialization);
+                Category.setText(category);
 
 
 
@@ -199,6 +200,41 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
                 String type = "changepassword";
                 backGroundWorker backgroundWorker = new backGroundWorker(getContext(),getActivity());
                 backgroundWorker.execute(type,uid,password);
+                dialog.dismiss();
+
+            }
+        });
+        dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog b = dialogBuilder.create();
+        b.show();
+    }
+    void getEditDetailsDailog(){
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.alert_edit_detials, null);
+        dialogBuilder.setView(dialogView);
+
+
+        final EditText newName = (EditText) dialogView.findViewById(R.id.new_name);
+        final EditText newMobile = (EditText) dialogView.findViewById(R.id.new_mobile);
+        final EditText newEmail = (EditText) dialogView.findViewById(R.id.new_email);
+        final EditText newSpecialization = (EditText) dialogView.findViewById(R.id.new_specialization);
+
+        dialogBuilder.setTitle("Edit Details ");
+        dialogBuilder.setMessage("Enter the new Details:");
+        dialogBuilder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                String newname=newName.getText().toString();
+                String newmobile=newMobile.getText().toString();
+                String newemail=newEmail.getText().toString();
+                String newspecialization=newSpecialization.getText().toString();
+                String type = "editdetails";
+                backGroundWorker backgroundWorker = new backGroundWorker(getContext(),getActivity());
+                backgroundWorker.execute(type,uid,newname,newmobile,newemail,newspecialization);
                 dialog.dismiss();
 
             }

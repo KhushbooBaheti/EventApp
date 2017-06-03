@@ -17,7 +17,7 @@ public class Conference {
     private int feesPart;
     private String confAbout;
     private String schedule;
-    private int imageId;
+    private String imageURL;
 
 
     public Conference(int id,String name,Date date){
@@ -29,7 +29,7 @@ public class Conference {
     public Conference(int id,String topic,Date date,
                       String venue,String confChair,
                       int days,int feesList,int feesPart,
-                      String confAbout,String schedule,int imageId){
+                      String confAbout,String schedule,String imageURL){
 
         confId=id;
         confTopic=topic;
@@ -41,7 +41,7 @@ public class Conference {
         this.feesPart=feesPart;
         this.confAbout=confAbout;
         this.schedule=schedule;
-        this.imageId=imageId;
+        this.imageURL=imageURL;
     }
 
     public int getConfId() {
@@ -114,12 +114,12 @@ public class Conference {
         this.feesPart = feesPart;
     }
 
-    public int getImageId() {
-        return imageId;
+    public String getImageURL() {
+        return imageURL;
     }
 
-    public void setImageId(int imageId) {
-        this.imageId = imageId;
+    public void setImageId(String imageURL) {
+        this.imageURL = imageURL;
     }
 
     public String getConfName() {
