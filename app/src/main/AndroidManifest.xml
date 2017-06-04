@@ -20,7 +20,6 @@
         </activity>
         <activity android:name=".basic.SignUpActivity" />
         <activity android:name=".basic.UserActivity" />
-        <activity android:name=".basic.LogoutActivity" />
         <activity android:name=".basic.MainActivity" />
         <activity android:name=".basic.ListOfConfActivity" />
         <activity android:name=".basic.LoginActivity" >

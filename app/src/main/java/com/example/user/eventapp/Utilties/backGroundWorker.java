@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
+import com.example.user.eventapp.basic.LoginActivity;
 import com.example.user.eventapp.basic.UserActivity;
 
 import java.io.BufferedReader;
@@ -222,18 +223,24 @@ public class backGroundWorker extends AsyncTask<String,Void,String> {
        // int uid=Integer.parseInt(result);
 
         if(result.equals("login not success,name,password or category not valid")){
-           /* Intent intent =new Intent(context, LoginActivity.class);
+            Intent intent =new Intent(context, LoginActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
-            activity.finish();*/
+            activity.finish();
         }
-        if(result.equals("password successfully changed")){
+        else if(result.equals("password successfully changed")){
 
         }
-        if(result.equals("details successfully changed")){
+        else if(result.equals("details successfully changed")){
 
         }
-        else{
+        else if(result.equals("successfully registered")){
+            Intent intent =new Intent(context, LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+            activity.finish();
+        }
+        else if(isInteger(result)){
             SharedPreferences sharedPreferences = context.getSharedPreferences("loggedIn info", Context.MODE_PRIVATE);
             final SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString("name", name);
@@ -251,5 +258,16 @@ public class backGroundWorker extends AsyncTask<String,Void,String> {
     @Override
     protected void onProgressUpdate(Void... values) {
         super.onProgressUpdate(values);
+    }
+    public static boolean isInteger(String s) {
+        try {
+            Integer.parseInt(s);
+        } catch(NumberFormatException e) {
+            return false;
+        } catch(NullPointerException e) {
+            return false;
+        }
+        // only got here if we didn't return false
+        return true;
     }
 }
