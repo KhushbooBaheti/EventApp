@@ -3,20 +3,25 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_person_black_24dp"
             android:title="@string/nav_profile" />
         <item
             android:id="@+id/nav_list_of_conf"
+            android:icon="@drawable/ic_event_black_24dp"
             android:title="@string/nav_list_of_conf" />
         <item
             android:id="@+id/nav_registered_conf"
+            android:icon="@drawable/ic_event_available_black_24dp"
             android:title="@string/nav_registered_conf" />
 
         <item
             android:id="@+id/nav_paper_status"
+            android:icon="@drawable/ic_insert_drive_file_black_24dp"
             android:title="@string/nav_paper_status" />
 
         <item
             android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_lock_open_black_24dp"
             android:title="@string/nav_logout"/>
     </group>
 </menu>

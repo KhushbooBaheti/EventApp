@@ -27,9 +27,9 @@ public class StartupActivity extends AppCompatActivity {
         SU = this;
         //cardView = (CardView) findViewById(R.id.card_view);
 
-        mToolbar = (Toolbar) findViewById(R.id.action_bar);
-        mToolbar.setTitle("EventApp");
-        setSupportActionBar(mToolbar);
+      //  mToolbar = (Toolbar) findViewById(R.id.action_bar);
+        //mToolbar.setTitle("EventApp");
+        //setSupportActionBar(mToolbar);
 
         //check for login
         checkForLogin();
