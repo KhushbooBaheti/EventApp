@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.user.eventapp.Adapters.ListConfAdapter;
@@ -59,6 +60,7 @@ public class ListOfConfActivity extends AppCompatActivity {
     private CardView cardview;
     ArrayList<Conference> conferenceList;
     int[] images;
+    private ProgressBar spinner;
 
 
 
@@ -68,6 +70,8 @@ public class ListOfConfActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_of_conf);
         Toolbar tootlbar = (Toolbar) findViewById(R.id.mToolbar);
+
+        spinner = (ProgressBar)findViewById(R.id.progressBar1);
         tootlbar.setTitle("Conferences");
         tootlbar.setTitleTextColor(getResources().getColor(R.color.white));
         setSupportActionBar(tootlbar);
@@ -95,7 +99,7 @@ public class ListOfConfActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view, int position) {
                         Conference conf = conferenceList.get(position);
-                        Toast.makeText(getApplicationContext(),conf.getConfName(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"Id is:"+conf.getConfId(),Toast.LENGTH_SHORT).show();
 
                     }
 
@@ -115,6 +119,17 @@ public class ListOfConfActivity extends AppCompatActivity {
         class GetDataJSON extends AsyncTask<String, Void, String> {
 
             HttpURLConnection httpURLConnection;
+
+
+
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                spinner.setVisibility(View.VISIBLE);
+
+            }
+
             @Override
             protected String doInBackground(String... params) {
                 StringBuilder result = new StringBuilder();
@@ -144,6 +159,7 @@ public class ListOfConfActivity extends AppCompatActivity {
 
             @Override
             protected void onPostExecute(String result){
+                spinner.setVisibility(View.GONE);
                 myJSON=result;
                 showList();
             }
