@@ -1,5 +1,7 @@
 package com.example.user.eventapp.basic;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -100,6 +102,15 @@ public class ListOfConfActivity extends AppCompatActivity {
                     public void onClick(View view, int position) {
                         Conference conf = conferenceList.get(position);
                         Toast.makeText(getApplicationContext(),"Id is:"+conf.getConfId(),Toast.LENGTH_SHORT).show();
+                        Context context = view.getContext();
+                        Intent intent = new Intent(context, ConferenceActivity.class);
+                        intent.putExtra("conf_name",conf.getConfName());
+                        intent.putExtra("conf_id",conf.getConfId());
+                        intent.putExtra("conf_chair",conf.getConfChair());
+                        intent.putExtra("conf_date",conf.getConfDate());
+                        intent.putExtra("conf_description",conf.getConfDescription());
+                        intent.putExtra("conf_days",conf.getDays());
+                        context.startActivity(intent);
 
                     }
 

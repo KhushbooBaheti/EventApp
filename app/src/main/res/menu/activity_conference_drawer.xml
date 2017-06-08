@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/about"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="About" />
+        <item
+            android:id="@+id/attendee_reg"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Attendee Registration" />
+        <item
+            android:id="@+id/presenter_reg"
+            android:icon="@drawable/ic_menu_share"
+            android:title="Presenter Registration" />
+        <item
+            android:id="@+id/paper_submission"
+            android:icon="@drawable/ic_menu_send"
+            android:title="Paper Submission" />
+
+    </group>
+
+
+</menu>
