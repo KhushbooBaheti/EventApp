@@ -31,5 +31,8 @@
         <item>Paper Status</item>
         <item>Logout</item>
     </string-array>
+    <string name="title_activity_conference">ConferenceActivity</string>
+
+    <string name="action_settings">Settings</string>
 
 </resources>

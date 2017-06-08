@@ -1,0 +1,78 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.user.eventapp.fragments.ConfDetailFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="80dp"
+        >
+
+        <TextView
+            android:id="@+id/name"
+            style="@style/tv_profile_details_head"
+            android:text="Title:" />
+
+        <TextView
+            android:id="@+id/Name"
+            style="@style/tv_profile_details_body"
+
+            android:layout_toRightOf="@id/name"
+            android:text="Name" />
+
+        <TextView
+            android:id="@+id/mobile"
+            style="@style/tv_profile_details_head"
+            android:layout_below="@id/name"
+            android:text="Mobile No.: " />
+
+        <TextView
+            android:id="@+id/Mobile"
+            style="@style/tv_profile_details_body"
+            android:layout_below="@id/Name"
+            android:layout_toRightOf="@id/mobile"
+            android:text="Mobile" />
+
+        <TextView
+            android:id="@+id/email"
+            style="@style/tv_profile_details_head"
+            android:layout_below="@id/mobile"
+            android:text="Email: " />
+
+        <TextView
+            android:id="@+id/Email"
+            style="@style/tv_profile_details_body"
+            android:layout_below="@id/Mobile"
+            android:layout_toRightOf="@id/email"
+            android:text="Email" />
+
+        <TextView
+            android:id="@+id/spec"
+            style="@style/tv_profile_details_head"
+            android:layout_below="@id/email"
+            android:text="Specialization:" />
+
+        <TextView
+            android:id="@+id/Spec"
+            style="@style/tv_profile_details_body"
+            android:layout_below="@id/Email"
+            android:layout_toRightOf="@id/spec"
+            android:text="Specialization" />
+        <TextView
+            android:id="@+id/category"
+            style="@style/tv_profile_details_head"
+            android:layout_below="@id/spec"
+            android:text="Category:" />
+
+        <TextView
+            android:id="@+id/Category"
+            style="@style/tv_profile_details_body"
+            android:layout_below="@id/Spec"
+            android:layout_toRightOf="@id/category"
+            android:text="category" />
+
+    </RelativeLayout>
+</FrameLayout>

@@ -17,6 +17,7 @@ public class PartRegFragment extends Fragment implements View.OnClickListener{
     Button btnPay;
     Button btnUpload;
     Button btnSumbit;
+    private String TAG_ID;
 
     public PartRegFragment() {
 
@@ -35,12 +36,12 @@ public class PartRegFragment extends Fragment implements View.OnClickListener{
 
 
 
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
 
 
         View view = inflater.inflate(R.layout.fragment_part_reg, container, false);
