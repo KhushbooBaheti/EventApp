@@ -62,47 +62,6 @@
 
                         />
 
-                    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
-                        android:id="@+id/radio"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_above="@+id/login"
-                        android:checkedButton="@+id/users"
-                        android:orientation="horizontal"
-                        android:buttonTint="@color/colorPrimaryDark"
-                        >
-
-                        <RadioButton
-                            android:id="@+id/organiser"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="30dp"
-                            android:layout_marginRight="30dp"
-                            android:onClick="checkedRadio"
-                            android:text="@string/organiser"
-                            android:buttonTint="@color/colorAction"
-                            />
-
-                        <RadioButton
-                            android:id="@+id/users"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="30dp"
-                            android:onClick="checkedRadio"
-                            android:text="@string/user"
-                            android:buttonTint="@color/colorAction"
-                            />
-
-
-                        <RadioButton
-                            android:id="@+id/volunteer"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:onClick="checkedRadio"
-                            android:text="@string/volunteer"
-                            android:buttonTint="@color/colorAction"
-                            />
-                    </RadioGroup>
 
                     <TextView
                         android:layout_width="match_parent"
@@ -128,7 +87,7 @@
                         android:id="@+id/password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/rollno"
+                        android:layout_below="@+id/uname"
                         android:layout_marginBottom="5dp"
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="5dp"

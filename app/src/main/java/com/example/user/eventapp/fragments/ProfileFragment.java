@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.user.eventapp.R;
@@ -42,7 +43,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
     JSONArray user;
     String name,email,specialization,category,uid,mobile;
 
-
+    private ProgressBar spinner;
 
     public ProfileFragment() {
 
@@ -71,6 +72,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         Category=(TextView)v.findViewById(R.id.Category);
         ChangePassword=(Button)v.findViewById(R.id.change_password);
         EditDetails=(Button)v.findViewById(R.id.edit_details);
+        spinner = (ProgressBar)v.findViewById(R.id.progressBar2);
 
         class GetDataJSON extends AsyncTask<String, Void, String> {
 
@@ -112,7 +114,14 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
             }
 
             @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                spinner.setVisibility(View.VISIBLE);
+            }
+
+            @Override
             protected void onPostExecute(String result){
+                spinner.setVisibility(View.GONE);
                 myJSON=result;
                 showList();
             }

@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String uname = name.getText().toString();
                 String upassword = password.getText().toString();
-                String category="user";
+               /* String category="user";
                 if(checkValue==1){
                     category="user";
                 }
@@ -45,21 +45,21 @@ public class LoginActivity extends AppCompatActivity {
                 else if(checkValue==3){
                     category="volunteer";
                 }
-
+*/
 
                 String type = "login";
                 backGroundWorker backgroundWorker = new backGroundWorker(getApplicationContext(),LoginActivity.this);
-                backgroundWorker.execute(type, uname,upassword,category);
+                backgroundWorker.execute(type, uname,upassword);
             }
         });
 
 
     }
-    public void checkedRadio(View view) {
+  /* public void checkedRadio(View view) {
         onRadioButtonClicked();
-    }
+    }*/
 
-    public void onRadioButtonClicked() {
+    /*public void onRadioButtonClicked() {
 
 
         organiser = (RadioButton) findViewById(R.id.organiser);
@@ -78,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
 
-    }
+    }*/
     public void signup(View v){
         Intent intent = new Intent(this, SignUpActivity.class);
         startActivity(intent);

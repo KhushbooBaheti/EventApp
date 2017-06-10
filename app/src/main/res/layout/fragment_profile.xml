@@ -4,12 +4,22 @@
     android:layout_height="match_parent"
     tools:context="com.example.user.eventapp.fragments.ProfileFragment">
 
+
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:layout_marginBottom="80dp"
         >
+        <ProgressBar
+            android:id="@+id/progressBar2"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+
+            android:layout_centerHorizontal="true" />
 
         <TextView
             android:id="@+id/name"
@@ -19,7 +29,6 @@
         <TextView
             android:id="@+id/Name"
             style="@style/tv_profile_details_body"
-
             android:layout_toRightOf="@id/name"
             android:text="Name" />
 
