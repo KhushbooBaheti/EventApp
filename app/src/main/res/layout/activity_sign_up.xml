@@ -86,6 +86,7 @@
                         android:layout_marginBottom="5dp"
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="5dp"
+                        android:maxLength="10"
                         android:hint="MOBILE NO"
                         android:inputType="phone"
                         android:textColor="#000000"
@@ -128,6 +129,28 @@
                         android:inputType="textPassword"
                         android:textColor="#000000"
                         android:textSize="15dp" />
+                    <EditText
+                        android:id="@+id/confirm_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/password"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="5dp"
+                        android:hint="CONFIRM-PASSWORD"
+                        android:inputType="textPassword"
+                        android:textColor="#000000"
+                        android:textSize="15dp" />
+                    <ImageView
+                        android:id="@+id/checkconfirm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_below="@id/password"
+                        android:visibility="invisible"
+                        android:src="@drawable/ic_check_black_24dp"
+                        />
+
 
                 </RelativeLayout>
             </android.support.v7.widget.CardView>

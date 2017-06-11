@@ -218,7 +218,7 @@ public class backGroundWorker extends AsyncTask<String,Void,String> {
 
     @Override
     protected void onPreExecute() {
-
+        Toast.makeText(context,"wait processing your request....",Toast.LENGTH_LONG).show();
 
     }
 
