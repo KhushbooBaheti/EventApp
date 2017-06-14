@@ -73,7 +73,7 @@ public class ListOfConfActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_of_conf);
         Toolbar tootlbar = (Toolbar) findViewById(R.id.mToolbar);
 
-        spinner = (ProgressBar)findViewById(R.id.progressBar1);
+       // spinner = (ProgressBar)findViewById(R.id.progressBar1);
         tootlbar.setTitle("Conferences");
         tootlbar.setTitleTextColor(getResources().getColor(R.color.white));
         setSupportActionBar(tootlbar);
@@ -137,8 +137,8 @@ public class ListOfConfActivity extends AppCompatActivity {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                spinner.setVisibility(View.VISIBLE);
-
+//                spinner.setVisibility(View.VISIBLE);
+//
             }
 
             @Override
@@ -170,7 +170,7 @@ public class ListOfConfActivity extends AppCompatActivity {
 
             @Override
             protected void onPostExecute(String result){
-                spinner.setVisibility(View.GONE);
+//                spinner.setVisibility(View.GONE);
                 myJSON=result;
                 showList();
             }
