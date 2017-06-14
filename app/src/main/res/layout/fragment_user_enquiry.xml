@@ -1,0 +1,51 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.user.eventapp.fragments.UserEnquiryFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_enquiry"
+            android:layout_margin="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:text="Enquiry"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/topic"
+            android:layout_margin="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Topic"
+
+            />
+        <EditText
+            android:id="@+id/message"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:hint="Enter your query here..."
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/btnenquire"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enquire"
+            android:textColor="#FFFFFF"
+            android:layout_margin="16dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/bg_button"/>
+
+    </LinearLayout>
+
+</FrameLayout>

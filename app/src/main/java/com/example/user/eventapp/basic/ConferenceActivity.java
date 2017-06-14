@@ -4,12 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.view.View;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -22,6 +19,7 @@ import com.example.user.eventapp.R;
 import com.example.user.eventapp.fragments.ConfDetailFragment;
 import com.example.user.eventapp.fragments.PartRegFragment;
 import com.example.user.eventapp.fragments.RegListFragment;
+import com.example.user.eventapp.fragments.UserEnquiryFragment;
 
 
 public class ConferenceActivity extends AppCompatActivity
@@ -38,7 +36,7 @@ public class ConferenceActivity extends AppCompatActivity
     private Fragment fragment;
     private Bundle bundle;
     private Intent intent;
-    private String UID;
+    private String uid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +50,7 @@ public class ConferenceActivity extends AppCompatActivity
         TAG_CONFCHAIR=getIntent().getStringExtra("conf_chair");
         TAG_DAYS=getIntent().getIntExtra("conf_days",0);
         TAG_STARTDATE=getIntent().getIntExtra("conf_date",0);
-        UID=getSharedPreferences("loggedIn info", Context.MODE_PRIVATE).getString("uid","");
+
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -136,6 +134,16 @@ public class ConferenceActivity extends AppCompatActivity
             bundle.putInt("Conf_id",TAG_CID);
             fragment.setArguments(bundle);
         } else if (id == R.id.paper_submission) {
+
+        }
+        else if (id == R.id.enquiry) {
+            fragment=new UserEnquiryFragment();
+            bundle=new Bundle();
+            bundle.putInt("Conf_id",TAG_CID);
+            SharedPreferences shared=getSharedPreferences("loggedIn info", Context.MODE_PRIVATE);
+            uid=shared.getString("uid","");
+            bundle.putString("uid",uid);
+            fragment.setArguments(bundle);
 
         }
         if (fragment != null) {

@@ -48,6 +48,7 @@ public class backGroundWorker extends AsyncTask<String,Void,String> {
         String signup_url = "http://eventapp.000webhostapp.com/signup.php";
         String change_password_url = "http://eventapp.000webhostapp.com/changePassword.php";
         String edit_details_url = "http://eventapp.000webhostapp.com/editdetails.php";
+        String user_enquiry_url = "http://eventapp.000webhostapp.com/userenquiry.php";
 
         if(type1.equals("login")) {
             try {
@@ -211,6 +212,50 @@ public class backGroundWorker extends AsyncTask<String,Void,String> {
                         e.printStackTrace();
                     }
                 }
+        else if(type1.equals("userenquiry")){
+            try {
+                String cid = params[1];
+                String uid = params[2];
+                String topic = params[3];
+                String message = params[4];
+                int CID=Integer.parseInt(cid);
+                int UID=Integer.parseInt(uid);
+
+
+
+                URL url = new URL(user_enquiry_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String post_data = URLEncoder.encode("cid","UTF-8")+"="+URLEncoder.encode(String.valueOf(CID),"UTF-8")+"&"
+                        +URLEncoder.encode("uid","UTF-8")+"="+URLEncoder.encode(String.valueOf(UID),"UTF-8")+"&"
+                        +URLEncoder.encode("topic","UTF-8")+"="+URLEncoder.encode(topic,"UTF-8")+"&"
+                        +URLEncoder.encode("message","UTF-8")+"="+URLEncoder.encode(message,"UTF-8");
+                bufferedWriter.write(post_data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"iso-8859-1"));
+                String result="";
+                String line="";
+                while((line = bufferedReader.readLine())!= null) {
+                    result += line;
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return result;
+
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+
+        }
 
 
                     return null;
@@ -240,10 +285,37 @@ public class backGroundWorker extends AsyncTask<String,Void,String> {
             Toast.makeText(context, result, Toast.LENGTH_LONG).show();
 
         }
+        else if(result.equals("enquiry successfully submitted")){
+            Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+
+
+        }
         else if(result.equals("details successfully changed")){
             Toast.makeText(context, result, Toast.LENGTH_LONG).show();
 
         }
+        else if(result.equals("oops! Please try again!")){
+            Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+
+        }
+        else if(result.equals("please fill all values")){
+            Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+
+        }
+        else if(result.equals("password or email already exist")){
+                Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+
+            }
+        else if(result.equals("please fill all the fields in the form")){
+            Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+
+        }
+        else if(result.equals("please fill all the fields in the form")){
+            Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+
+        }
+
+
         else if(result.equals("successfully registered")){
             Toast.makeText(context, result, Toast.LENGTH_LONG).show();
             Intent intent =new Intent(context, LoginActivity.class);
