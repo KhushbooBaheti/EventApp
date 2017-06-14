@@ -21,6 +21,7 @@
     <string name="nav_registered_conf">Registered Conferences</string>
     <string name="nav_paper_status">Paper Status</string>
     <string name="nav_logout">Logout</string>
+    <string name="nav_enquiry">Enquiry</string>
 
 
     <!-- Toolbar titles when navigation menu item is selected -->
@@ -30,6 +31,7 @@
         <item>Registered Conferences</item>
         <item>Paper Status</item>
         <item>Logout</item>
+        <item>Enquiry</item>
     </string-array>
     <string name="title_activity_conference">ConferenceActivity</string>
 

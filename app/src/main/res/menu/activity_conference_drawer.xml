@@ -18,6 +18,10 @@
             android:id="@+id/paper_submission"
             android:icon="@drawable/ic_menu_send"
             android:title="Paper Submission" />
+        <item
+            android:id="@+id/enquiry"
+            android:icon="@drawable/ic_menu_send"
+            android:title="Enquiry" />
 
     </group>
 

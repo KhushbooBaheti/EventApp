@@ -10,6 +10,10 @@ import android.widget.Toast;
 import com.example.user.eventapp.basic.LoginActivity;
 import com.example.user.eventapp.basic.UserActivity;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -28,9 +32,10 @@ import java.net.URLEncoder;
 
 public class backGroundWorker extends AsyncTask<String,Void,String> {
 
-    String type1,name,category;
+    String type1,name,category,uid;
     Context context;
     Activity activity;
+    JSONArray user;
 
     public backGroundWorker (Context ctx,Activity act) {
         context = ctx;
@@ -43,12 +48,13 @@ public class backGroundWorker extends AsyncTask<String,Void,String> {
         String signup_url = "http://eventapp.000webhostapp.com/signup.php";
         String change_password_url = "http://eventapp.000webhostapp.com/changePassword.php";
         String edit_details_url = "http://eventapp.000webhostapp.com/editdetails.php";
+        String user_enquiry_url = "http://eventapp.000webhostapp.com/userenquiry.php";
 
         if(type1.equals("login")) {
             try {
                  name = params[1];
                 String password = params[2];
-                 category = params[3];
+
                 URL url = new URL(login_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
@@ -57,8 +63,8 @@ public class backGroundWorker extends AsyncTask<String,Void,String> {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
                 String post_data = URLEncoder.encode("user_name","UTF-8")+"="+URLEncoder.encode(name,"UTF-8")+"&"
-                        +URLEncoder.encode("password","UTF-8")+"="+URLEncoder.encode(password,"UTF-8")+"&"
-                        +URLEncoder.encode("category","UTF-8")+"="+URLEncoder.encode(category,"UTF-8");
+                        +URLEncoder.encode("password","UTF-8")+"="+URLEncoder.encode(password,"UTF-8");
+
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -206,6 +212,50 @@ public class backGroundWorker extends AsyncTask<String,Void,String> {
                         e.printStackTrace();
                     }
                 }
+        else if(type1.equals("userenquiry")){
+            try {
+                String cid = params[1];
+                String uid = params[2];
+                String topic = params[3];
+                String message = params[4];
+                int CID=Integer.parseInt(cid);
+                int UID=Integer.parseInt(uid);
+
+
+
+                URL url = new URL(user_enquiry_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String post_data = URLEncoder.encode("cid","UTF-8")+"="+URLEncoder.encode(String.valueOf(CID),"UTF-8")+"&"
+                        +URLEncoder.encode("uid","UTF-8")+"="+URLEncoder.encode(String.valueOf(UID),"UTF-8")+"&"
+                        +URLEncoder.encode("topic","UTF-8")+"="+URLEncoder.encode(topic,"UTF-8")+"&"
+                        +URLEncoder.encode("message","UTF-8")+"="+URLEncoder.encode(message,"UTF-8");
+                bufferedWriter.write(post_data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"iso-8859-1"));
+                String result="";
+                String line="";
+                while((line = bufferedReader.readLine())!= null) {
+                    result += line;
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return result;
+
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+
+        }
 
 
                     return null;
@@ -213,46 +263,104 @@ public class backGroundWorker extends AsyncTask<String,Void,String> {
 
     @Override
     protected void onPreExecute() {
+        Toast.makeText(context,"wait processing your request....",Toast.LENGTH_LONG).show();
 
     }
 
     @Override
     protected void onPostExecute(String result) {
-        Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+
 
        // int uid=Integer.parseInt(result);
+        if(result!=null){
 
-        if(result.equals("login not success,name,password or category not valid")){
+        if(result.equals("login not success,name or password not valid")){
+            Toast.makeText(context, result, Toast.LENGTH_LONG).show();
             Intent intent =new Intent(context, LoginActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
             activity.finish();
         }
         else if(result.equals("password successfully changed")){
+            Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+
+        }
+        else if(result.equals("enquiry successfully submitted")){
+            Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+
 
         }
         else if(result.equals("details successfully changed")){
+            Toast.makeText(context, result, Toast.LENGTH_LONG).show();
 
         }
+        else if(result.equals("oops! Please try again!")){
+            Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+
+        }
+        else if(result.equals("please fill all values")){
+            Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+
+        }
+        else if(result.equals("password or email already exist")){
+                Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+
+            }
+        else if(result.equals("please fill all the fields in the form")){
+            Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+
+        }
+        else if(result.equals("please fill all the fields in the form")){
+            Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+
+        }
+
+
         else if(result.equals("successfully registered")){
+            Toast.makeText(context, result, Toast.LENGTH_LONG).show();
             Intent intent =new Intent(context, LoginActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
             activity.finish();
         }
-        else if(isInteger(result)){
+        else {
+
+            try {
+                JSONObject jsonObj = new JSONObject(result);
+                user = jsonObj.getJSONArray("result");
+
+                for(int i=0;i<user.length();i++){
+                    JSONObject c = user.getJSONObject(i);
+                    uid=c.getString("uid");
+
+                    category=c.getString("category");
+
+
+
+                }
+
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            Toast.makeText(context, "logging in.... with uid:"+uid, Toast.LENGTH_LONG).show();
             SharedPreferences sharedPreferences = context.getSharedPreferences("loggedIn info", Context.MODE_PRIVATE);
             final SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString("name", name);
             editor.putString("category", category);
-            editor.putString("uid",result);
+            editor.putString("uid",uid);
             editor.commit();
 
             Intent intent = new Intent(context, UserActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
             activity.finish();
+        }}
+        else{
+            Toast.makeText(context, "check your internet connection,if already connected then server may be down try later", Toast.LENGTH_LONG).show();
         }
+
     }
 
     @Override
