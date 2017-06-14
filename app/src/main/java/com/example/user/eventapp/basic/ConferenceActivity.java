@@ -30,6 +30,7 @@ public class ConferenceActivity extends AppCompatActivity
     private int TAG_CID ;
     private String TAG_TOPIC ="topic";
     private int TAG_STARTDATE;
+    private String TAG_VENUE ="venue";
     private String TAG_ABOUT ="about";
     private String TAG_SCHEDULE ="schedule";
     private String TAG_CONFCHAIR ="confchair";

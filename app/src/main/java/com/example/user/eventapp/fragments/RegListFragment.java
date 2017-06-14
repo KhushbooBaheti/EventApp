@@ -10,7 +10,7 @@ import android.widget.Toast;
 import com.example.user.eventapp.R;
 
 public class RegListFragment extends Fragment {
-private int TAG_CID;
+    private int TAG_CID;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -30,4 +30,3 @@ private int TAG_CID;
 
 
 }
-
