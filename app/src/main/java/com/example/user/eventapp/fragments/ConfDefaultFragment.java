@@ -14,7 +14,7 @@ import com.example.user.eventapp.R;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class ConfDetailFragment extends Fragment {
+public class ConfDefaultFragment extends Fragment {
     private String TAG_TOPIC;
     private String TAG_ABOUT;
     private String TAG_CONFCHAIR;
@@ -31,12 +31,7 @@ public class ConfDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
 
 
-        View view = inflater.inflate(R.layout.fragment_conf_detail, container, false);
-        title = (TextView)view.findViewById(R.id.Name);
-        chair = (TextView)view.findViewById(R.id.Mobile);
-        about = (TextView)view.findViewById(R.id.Email);
-        startdate = (TextView)view.findViewById(R.id.Spec);
-        days = (TextView)view.findViewById(R.id.Category);
+        View view = inflater.inflate(R.layout.fragment_conf_default, container, false);
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             TAG_CID = bundle.getInt("Conf_id");
@@ -49,14 +44,6 @@ public class ConfDetailFragment extends Fragment {
 
 //        String num=Integer.toString(TAG_CID);
 //        Toast.makeText(getActivity(),num,Toast.LENGTH_SHORT).show();
-
-        title.setText(TAG_TOPIC);
-        chair.setText(TAG_CONFCHAIR);
-        about.setText(TAG_ABOUT);
-        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
-        String formattedDate = df.format(TAG_STARTDATE.getTime());
-        startdate.setText(formattedDate);
-        days.setText(Integer.toString(TAG_DAYS));
         return view;
 
     }

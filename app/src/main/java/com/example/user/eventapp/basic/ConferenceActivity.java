@@ -3,10 +3,14 @@ package com.example.user.eventapp.basic;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.icu.text.SimpleDateFormat;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -16,10 +20,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.user.eventapp.R;
+import com.example.user.eventapp.fragments.ConfDefaultFragment;
 import com.example.user.eventapp.fragments.ConfDetailFragment;
 import com.example.user.eventapp.fragments.PartRegFragment;
 import com.example.user.eventapp.fragments.RegListFragment;
 import com.example.user.eventapp.fragments.UserEnquiryFragment;
+
+import java.util.Date;
 
 
 public class ConferenceActivity extends AppCompatActivity
@@ -27,7 +34,7 @@ public class ConferenceActivity extends AppCompatActivity
     private String TAG_RESULTS="result";
     private int TAG_CID ;
     private String TAG_TOPIC ="topic";
-    private int TAG_STARTDATE;
+    private Date TAG_STARTDATE;
     private String TAG_VENUE ="venue";
     private String TAG_ABOUT ="about";
     private String TAG_SCHEDULE ="schedule";
@@ -37,28 +44,28 @@ public class ConferenceActivity extends AppCompatActivity
     private Bundle bundle;
     private Intent intent;
     private String uid;
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conference);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        intent=new Intent();
+        getSupportActionBar().setTitle(TAG_TOPIC);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //intent=new Intent();
         TAG_ABOUT=getIntent().getStringExtra("conf_description");
         TAG_CID=getIntent().getIntExtra("conf_id",0);
         TAG_TOPIC=getIntent().getStringExtra("conf_name");
         TAG_CONFCHAIR=getIntent().getStringExtra("conf_chair");
         TAG_DAYS=getIntent().getIntExtra("conf_days",0);
-        TAG_STARTDATE=getIntent().getIntExtra("conf_date",0);
+        TAG_STARTDATE=new Date(getIntent().getLongExtra("conf_date",0));
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
+
+        FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
+        tx.replace(R.id.frame1, new ConfDefaultFragment());
+        tx.commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -114,6 +121,7 @@ public class ConferenceActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.about) {
+            getSupportActionBar().setTitle(TAG_TOPIC);
             fragment = new ConfDetailFragment();
             bundle = new Bundle();
             bundle.putInt("Conf_id",TAG_CID);
@@ -121,22 +129,24 @@ public class ConferenceActivity extends AppCompatActivity
             bundle.putString("Conf_chair",TAG_CONFCHAIR);
             bundle.putString("Conf_desc",TAG_ABOUT);
             bundle.putInt("Conf_days",TAG_DAYS);
-            bundle.putInt("Conf_date",TAG_STARTDATE);
+            long time = TAG_STARTDATE.getTime();
+            bundle.putLong("Conf_date",time);
             fragment.setArguments(bundle);
         } else if (id == R.id.attendee_reg) {
+            getSupportActionBar().setTitle(TAG_TOPIC);
             fragment = new RegListFragment();
             bundle = new Bundle();
             bundle.putInt("Conf_id",TAG_CID);
             fragment.setArguments(bundle);
         } else if (id == R.id.presenter_reg) {
+            getSupportActionBar().setTitle(TAG_TOPIC);
             fragment = new PartRegFragment();
             bundle = new Bundle();
             bundle.putInt("Conf_id",TAG_CID);
             fragment.setArguments(bundle);
-        } else if (id == R.id.paper_submission) {
-
         }
         else if (id == R.id.enquiry) {
+            getSupportActionBar().setTitle(TAG_TOPIC);
             fragment=new UserEnquiryFragment();
             bundle=new Bundle();
             bundle.putInt("Conf_id",TAG_CID);
@@ -157,6 +167,7 @@ public class ConferenceActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 
 
 }

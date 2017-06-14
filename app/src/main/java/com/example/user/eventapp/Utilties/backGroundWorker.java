@@ -49,6 +49,7 @@ public class backGroundWorker extends AsyncTask<String,Void,String> {
         String change_password_url = "http://eventapp.000webhostapp.com/changePassword.php";
         String edit_details_url = "http://eventapp.000webhostapp.com/editdetails.php";
         String user_enquiry_url = "http://eventapp.000webhostapp.com/userenquiry.php";
+        String listener_reg_url = "http://eventapp.000webhostapp.com/listener.php";
 
         if(type1.equals("login")) {
             try {
@@ -256,6 +257,47 @@ public class backGroundWorker extends AsyncTask<String,Void,String> {
             }
 
         }
+        else if(type1.equals("listenerRegistration")){
+            try {
+                String cid = params[1];
+                String uid = params[2];
+                String type = params[3];
+                int CID=Integer.parseInt(cid);
+                int UID=Integer.parseInt(uid);
+
+
+                URL url = new URL(listener_reg_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String post_data = URLEncoder.encode("cid","UTF-8")+"="+URLEncoder.encode(String.valueOf(CID),"UTF-8")+"&"
+                        +URLEncoder.encode("uid","UTF-8")+"="+URLEncoder.encode(String.valueOf(UID),"UTF-8")+"&"
+                        +URLEncoder.encode("type","UTF-8")+"="+URLEncoder.encode(type,"UTF-8");
+                bufferedWriter.write(post_data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"iso-8859-1"));
+                String result="";
+                String line="";
+                while((line = bufferedReader.readLine())!= null) {
+                    result += line;
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return result;
+
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+
+        }
 
 
                     return null;
@@ -307,6 +349,10 @@ public class backGroundWorker extends AsyncTask<String,Void,String> {
 
             }
         else if(result.equals("please fill all the fields in the form")){
+            Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+
+        }
+        else if(result.equals("successfully registered as Listener")){
             Toast.makeText(context, result, Toast.LENGTH_LONG).show();
 
         }
