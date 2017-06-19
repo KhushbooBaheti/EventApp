@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.user.eventapp.R;
 import com.example.user.eventapp.Utilties.backGroundWorker;
@@ -62,13 +63,14 @@ public class UserEnquiryFragment extends Fragment implements View.OnClickListene
                 Topic=topic.getText().toString();
                 Message=message.getText().toString();
                 String type = "userenquiry";
-               // Toast.makeText(getContext(),"cid"+cid,Toast.LENGTH_SHORT).show();
+
                 backGroundWorker backgroundWorker = new backGroundWorker(getContext(),getActivity());
                 backgroundWorker.execute(type, cid,uid,Topic,Message);
                 InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
                 imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                 topic.getText().clear();
                 message.getText().clear();
+                Toast.makeText(getContext(),"you will be replied soon by one of our organisers ,on your registered email", Toast.LENGTH_SHORT).show();
 
 
                 break;
