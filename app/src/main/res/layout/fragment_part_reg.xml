@@ -116,30 +116,50 @@
             />
 
         <Button
-            android:id="@+id/btnUpload"
+            android:id="@+id/btnRegister"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_button"
             android:layout_below="@id/tv1"
             android:layout_margin="16dp"
-            android:text="Upload"
+            android:text="Register"
             android:textColor="#ffffff"
             android:layout_centerHorizontal="true"
             android:onClick="upload Paper"
             />
-
-        <Button
-            android:id="@+id/btnSubmit"
-            android:background="@drawable/bg_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/btnUpload"
-            android:layout_margin="16dp"
-            android:text="Register"
-            android:textColor="#ffffff"
+        <LinearLayout
+            android:id="@+id/linear_paper"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@id/btnRegister"
             android:layout_centerHorizontal="true"
-            android:onClick="presenterRegister"
-            />
+            android:orientation="horizontal"
+            android:layout_marginLeft="60dp"
+            >
+
+            <Button
+                android:id="@+id/btnSelect"
+                android:background="@drawable/bg_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="Select Paper"
+                android:textColor="#ffffff"
+                android:onClick="presenterRegister"
+                />
+            <Button
+                android:id="@+id/btnUpload"
+                android:background="@drawable/bg_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="Upload Paper"
+                android:textColor="#ffffff"
+                android:layout_centerHorizontal="true"
+                android:onClick="presenterRegister"
+                />
+
+        </LinearLayout>
 
 
     </RelativeLayout>

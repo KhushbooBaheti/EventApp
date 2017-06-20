@@ -352,7 +352,7 @@ public class backGroundWorker extends AsyncTask<String,Void,String> {
             Toast.makeText(context, result, Toast.LENGTH_LONG).show();
 
         }
-        else if(result.equals("successfully registered as Listener")){
+        else if(result.equals("successfully registered")){
             Toast.makeText(context, result, Toast.LENGTH_LONG).show();
 
         }

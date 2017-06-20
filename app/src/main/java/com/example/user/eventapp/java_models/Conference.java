@@ -18,6 +18,7 @@ public class Conference {
     private String confAbout;
     private String schedule;
     private String imageURL;
+    private boolean readCond;
 
 
     public Conference(int id,String name,Date date){
@@ -42,6 +43,7 @@ public class Conference {
         this.confAbout=confAbout;
         this.schedule=schedule;
         this.imageURL=imageURL;
+        this.readCond=false;
     }
 
     public int getConfId() {
