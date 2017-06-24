@@ -73,7 +73,7 @@
             android:layout_below="@id/email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal">
             <TextView
 
@@ -92,50 +92,60 @@
                 android:text="100"
                 android:textSize="20sp"
                 />
+
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:id="@+id/Linear_reg_guidelines"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@id/ll1"
+            android:layout_marginTop="30dp"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btnGuidelines"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_button"
+                android:layout_margin="16dp"
+                android:text="Guidelines"
+                android:textColor="#ffffff"
+                android:layout_centerHorizontal="true"
+                />
+
+            <Button
+                android:id="@+id/btnRegister"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_button"
+                android:layout_margin="16dp"
+                android:text="Register"
+                android:textColor="#ffffff"
+                android:layout_centerHorizontal="true"
+                />
             <Button
                 android:id="@+id/btnPay"
-                android:layout_width="70dp"
-                android:layout_height="40dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:background="@drawable/bg_button"
-                android:layout_marginLeft="70dp"
+                android:layout_margin="16dp"
                 android:text="Pay"
-
+                android:textColor="#ffffff"
+                android:layout_centerHorizontal="true"
                 />
 
         </LinearLayout>
-        <TextView
-            android:id="@+id/tv1"
-            android:layout_below="@id/ll1"
-            android:layout_centerHorizontal="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Submit Paper"
-            android:textSize="20sp"
-            android:layout_margin="16dp"
-            android:clickable="true"
-            />
-
-        <Button
-            android:id="@+id/btnRegister"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_button"
-            android:layout_below="@id/tv1"
-            android:layout_margin="16dp"
-            android:text="Register"
-            android:textColor="#ffffff"
-            android:layout_centerHorizontal="true"
-            android:onClick="upload Paper"
-            />
         <LinearLayout
             android:id="@+id/linear_paper"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:layout_below="@id/btnRegister"
-            android:layout_centerHorizontal="true"
             android:orientation="horizontal"
-            android:layout_marginLeft="60dp"
-            >
+            android:layout_below="@+id/textView"
+            android:gravity="center">
 
             <Button
                 android:id="@+id/btnSelect"
@@ -143,7 +153,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:text="Select Paper"
+                android:text="Select"
                 android:textColor="#ffffff"
                 android:onClick="presenterRegister"
                 />
@@ -153,13 +163,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:text="Upload Paper"
+                android:text="Upload"
                 android:textColor="#ffffff"
                 android:layout_centerHorizontal="true"
                 android:onClick="presenterRegister"
                 />
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Linear_reg_guidelines"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:text="Regarding Paper"
+            android:textSize="25dp"/>
 
 
     </RelativeLayout>

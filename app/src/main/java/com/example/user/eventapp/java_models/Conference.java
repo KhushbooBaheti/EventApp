@@ -43,7 +43,6 @@ public class Conference {
         this.confAbout=confAbout;
         this.schedule=schedule;
         this.imageURL=imageURL;
-        this.readCond=false;
     }
 
     public int getConfId() {
