@@ -1,6 +1,8 @@
 package com.example.user.eventapp.fragments;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -181,9 +183,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
                 Email.setText(email);
                 Specialization.setText(specialization);
                 Category.setText(category);
-
-
-
+                SharedPreferences.Editor editor=this.getActivity().getSharedPreferences("UID_Details", Context.MODE_PRIVATE).edit();
+                editor.putString("Name",name);
+                editor.putString("Mobile_No",mobile);
+                editor.putString("Email",email);
+                editor.commit();
             }
 
 
