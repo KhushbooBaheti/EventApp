@@ -73,7 +73,7 @@ public class ListOfConfActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_of_conf);
         Toolbar tootlbar = (Toolbar) findViewById(R.id.mToolbar);
 
-        spinner = (ProgressBar)findViewById(R.id.progressBar1);
+       // spinner = (ProgressBar)findViewById(R.id.progressBar1);
         tootlbar.setTitle("Conferences");
         tootlbar.setTitleTextColor(getResources().getColor(R.color.white));
         setSupportActionBar(tootlbar);
@@ -101,13 +101,15 @@ public class ListOfConfActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view, int position) {
                         Conference conf = conferenceList.get(position);
+                        Date time=conf.getConfDate();
+                        long time1 =time.getTime();
                         Toast.makeText(getApplicationContext(),"Id is:"+conf.getConfId(),Toast.LENGTH_SHORT).show();
                         Context context = view.getContext();
                         Intent intent = new Intent(context, ConferenceActivity.class);
                         intent.putExtra("conf_name",conf.getConfName());
                         intent.putExtra("conf_id",conf.getConfId());
                         intent.putExtra("conf_chair",conf.getConfChair());
-                        intent.putExtra("conf_date",conf.getConfDate());
+                        intent.putExtra("conf_date",time1);
                         intent.putExtra("conf_description",conf.getConfDescription());
                         intent.putExtra("conf_days",conf.getDays());
                         context.startActivity(intent);
@@ -137,8 +139,8 @@ public class ListOfConfActivity extends AppCompatActivity {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                spinner.setVisibility(View.VISIBLE);
-
+//                spinner.setVisibility(View.VISIBLE);
+//
             }
 
             @Override
@@ -170,7 +172,7 @@ public class ListOfConfActivity extends AppCompatActivity {
 
             @Override
             protected void onPostExecute(String result){
-                spinner.setVisibility(View.GONE);
+//                spinner.setVisibility(View.GONE);
                 myJSON=result;
                 showList();
             }

@@ -37,4 +37,10 @@
 
     <string name="action_settings">Settings</string>
 
+    <string-array name="nav_item_activity_Conf_titles">
+        <item>About</item>
+        <item>Attendee Registration</item>
+        <item>Presenter Registration</item>
+        <item>Enquiry</item>
+    </string-array>
 </resources>

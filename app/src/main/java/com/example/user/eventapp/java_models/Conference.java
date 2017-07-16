@@ -18,6 +18,7 @@ public class Conference {
     private String confAbout;
     private String schedule;
     private String imageURL;
+    private boolean readCond;
 
 
     public Conference(int id,String name,Date date){
