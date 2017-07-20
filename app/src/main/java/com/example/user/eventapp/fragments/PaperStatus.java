@@ -1,99 +1,203 @@
 package com.example.user.eventapp.fragments;
 
+import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
+import com.example.user.eventapp.Adapters.ListOfPapers;
 import com.example.user.eventapp.R;
+import com.example.user.eventapp.Utilties.RecyclerTouchListener;
+import com.example.user.eventapp.basic.UserActivity;
+import com.example.user.eventapp.java_models.Papers;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link PaperStatus.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link PaperStatus#newInstance} factory method to
- * create an instance of this fragment.
- */
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+
 public class PaperStatus extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
-    private OnFragmentInteractionListener mListener;
+    RecyclerView recyclerView;
+    String myJSON;
+    JSONArray papers = null;
+    String uid;
+    ArrayList<Papers> paperList;
 
-    public PaperStatus() {
-        // Required empty public constructor
-    }
+    private ProgressBar spinner;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment PaperStatus.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static PaperStatus newInstance(String param1, String param2) {
-        PaperStatus fragment = new PaperStatus();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
+    String paper_fetch = "http://eventapp.000webhostapp.com/userPaperStatus.php";
+    private static final String TAG_RESULTS="result";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_paper_status, container, false);
+
+
+        View view=inflater.inflate(R.layout.fragment_paper_status,container,false);
+        //barber=new ArrayList<>();
+        //  alertMsg=(TextView)view.findViewById( R.id.alert_msg);
+
+        uid=((UserActivity)getActivity()).getUid();
+        recyclerView=(RecyclerView)view.findViewById(R.id.recycler_view_list_paper);
+
+        paperList=new ArrayList<Papers>();
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        recyclerView.addOnItemTouchListener(
+                new RecyclerTouchListener(getActivity().getApplicationContext(), recyclerView ,new RecyclerTouchListener.OnItemClickListener() {
+                    @Override
+                    public void onClick(View view, int position) {
+                        Papers conf = paperList.get(position);
+                        String url = "https://docs.google.com/gview?embedded=true&url=" + conf.getUrl();
+                        Intent i = new Intent(Intent.ACTION_VIEW);
+                        i.setData(Uri.parse(url));
+                        startActivity(i);
+                    }
+
+                    @Override
+                    public void onLongClick(View view, int position) {
+
+                    }
+                })
+        );
+
+        getData();
+    return view;
+
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+
+
+
+
+
+
+
+    public void getData(){
+        class GetDataJSON extends AsyncTask<String, Void, String> {
+
+            HttpURLConnection httpURLConnection;
+
+
+
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+//                spinner.setVisibility(View.VISIBLE);
+//
+            }
+
+            @Override
+            protected String doInBackground(String... params) {
+                StringBuilder result = new StringBuilder();
+
+                try{
+                    URL url = new URL(paper_fetch);
+                    int UID=Integer.parseInt(uid);
+                    HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+
+                    httpURLConnection.setRequestMethod("POST");
+                    httpURLConnection.setDoOutput(true);
+                    httpURLConnection.setDoInput(true);
+                    OutputStream outputStream = httpURLConnection.getOutputStream();
+                    BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                    String post_data = URLEncoder.encode("uid","UTF-8")+"="+URLEncoder.encode(String.valueOf(UID),"UTF-8");
+                    bufferedWriter.write(post_data);
+                    bufferedWriter.flush();
+                    bufferedWriter.close();
+                    outputStream.close();
+
+                    InputStream in = new BufferedInputStream(httpURLConnection.getInputStream());
+
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+
+                    String line=null;
+                    while ((line = reader.readLine()) != null) {
+                        result.append(line);
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                finally {
+                    //httpURLConnection.disconnect();
+                }
+                return result.toString();
+            }
+
+            @Override
+            protected void onPostExecute(String result){
+//                spinner.setVisibility(View.GONE);
+                myJSON=result;
+                showList();
+            }
         }
+        GetDataJSON g = new GetDataJSON();
+        g.execute();
     }
+    public void showList(){
+        try {
+            JSONObject jsonObj = new JSONObject(myJSON);
+            papers = jsonObj.getJSONArray(TAG_RESULTS);
+
+            for(int i=0;i<papers.length();i++){
+                JSONObject c = papers.getJSONObject(i);
+
+
+                int id = Integer.parseInt(c.getString("id"));
+                String topic = c.getString("topic");
+                String papertopic = c.getString("papertopic");
+                String status = c.getString("status");
+
+                String url = c.getString("url");
+
+                Papers conf=new Papers(id, topic, papertopic, status, url);
+
+
+                paperList.add(conf);
+            }
+
+            if(paperList!=null){
+            ListOfPapers listConfAdapter = new ListOfPapers(getActivity().getApplicationContext(),paperList);
+            recyclerView.setAdapter(listConfAdapter);}
+            else {
+                Toast.makeText(getContext(), "Null list", Toast.LENGTH_SHORT).show();
+            }
 
 
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
 }

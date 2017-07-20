@@ -14,7 +14,7 @@
             android:id="@+id/mToolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:title="Change Items">
+            android:title="Conferences">
 
         </android.support.v7.widget.Toolbar>
 
