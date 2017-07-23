@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -25,6 +26,7 @@ public class CustomDialog extends Dialog implements
     private Activity c;
     private Dialog d;
     private Button yes, no;
+    private EditText topicName;
     private CheckBox check;
     private boolean readCond = false;
     private String uid;
@@ -73,6 +75,7 @@ public class CustomDialog extends Dialog implements
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.custom_dialog);
+        topicName = (EditText)findViewById(R.id.edtxt_topic);
         check = (CheckBox)findViewById(R.id.checkbtn);
         yes = (Button) findViewById(R.id.btn_yes);
         no = (Button) findViewById(R.id.btn_no);

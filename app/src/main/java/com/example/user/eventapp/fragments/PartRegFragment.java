@@ -43,15 +43,17 @@ public class PartRegFragment extends Fragment implements View.OnClickListener{
     private Button btnRegister;
     private Button btnSelect;
     private Button btnGuidelines;
-    private String TAG_ID;
+    private String TAG_ID,paperTopic;
     private int TAG_CID;
     private String uid,cid;
     private String name;
     private String mobile;
     private String email;
+    private String paperStatus = "uploaded";
     private EditText namefield;
     private EditText mobilefield;
     private EditText emailfield;
+    private EditText topicField;
     private String checktype = "2";
     private LinearLayout paper;
     private boolean readCond;
@@ -95,6 +97,7 @@ public class PartRegFragment extends Fragment implements View.OnClickListener{
         namefield=(EditText)view.findViewById(R.id.name);
         mobilefield=(EditText)view.findViewById(R.id.mobile);
         emailfield=(EditText)view.findViewById(R.id.email);
+        topicField = (EditText)view.findViewById(R.id.editText2);
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             TAG_CID = bundle.getInt("Conf_id");
@@ -111,7 +114,7 @@ public class PartRegFragment extends Fragment implements View.OnClickListener{
         mobilefield.setEnabled(false);
         emailfield.setEnabled(false);
         uid=this.getActivity().getSharedPreferences("loggedIn info", Context.MODE_PRIVATE).getString("uid","");
-
+        paperTopic = topicField.getText().toString();
         return view;
 
     }
@@ -188,7 +191,9 @@ public class PartRegFragment extends Fragment implements View.OnClickListener{
 
                 //Creating a multi part request
                 new MultipartUploadRequest(getActivity(), uploadId, UPLOAD_URL)
-                        .addFileToUpload(path, "pdf") //Adding file
+                        .addFileToUpload(path, "pdf")
+                        .addParameter("status",paperStatus)//Adding file
+                        .addParameter("topic",paperTopic)
                         .addParameter("uid",uid)
                         .addParameter("cid",cid)//Adding text parameter to the request
                         .setNotificationConfig(new UploadNotificationConfig())
