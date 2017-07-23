@@ -75,7 +75,6 @@ public class CustomDialog extends Dialog implements
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.custom_dialog);
-        topicName = (EditText)findViewById(R.id.edtxt_topic);
         check = (CheckBox)findViewById(R.id.checkbtn);
         yes = (Button) findViewById(R.id.btn_yes);
         no = (Button) findViewById(R.id.btn_no);

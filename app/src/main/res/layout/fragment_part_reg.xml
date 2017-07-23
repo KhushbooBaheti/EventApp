@@ -140,18 +140,6 @@
 
         </LinearLayout>
 
-        <EditText
-            android:id="@+id/editText2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textView"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Your Paper topic here" />
 
 
         <LinearLayout
@@ -159,7 +147,7 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:orientation="horizontal"
-            android:layout_below="@+id/editText2"
+            android:layout_below="@+id/textView"
             android:gravity="center">
 
 

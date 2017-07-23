@@ -2,6 +2,7 @@ package com.example.user.eventapp.fragments;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -14,6 +15,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -97,7 +99,7 @@ public class PartRegFragment extends Fragment implements View.OnClickListener{
         namefield=(EditText)view.findViewById(R.id.name);
         mobilefield=(EditText)view.findViewById(R.id.mobile);
         emailfield=(EditText)view.findViewById(R.id.email);
-        topicField = (EditText)view.findViewById(R.id.editText2);
+        //topicField = (EditText)view.findViewById(R.id.editText2);
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             TAG_CID = bundle.getInt("Conf_id");
@@ -114,7 +116,6 @@ public class PartRegFragment extends Fragment implements View.OnClickListener{
         mobilefield.setEnabled(false);
         emailfield.setEnabled(false);
         uid=this.getActivity().getSharedPreferences("loggedIn info", Context.MODE_PRIVATE).getString("uid","");
-        paperTopic = topicField.getText().toString();
         return view;
 
     }
@@ -145,7 +146,30 @@ public class PartRegFragment extends Fragment implements View.OnClickListener{
                 break;
             case R.id.btnUpload:
                 //Toast.makeText(getActivity(),"Paid.....",Toast.LENGTH_SHORT).show();
-                uploadMultipart();
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
+                LayoutInflater inflater = getActivity().getLayoutInflater();
+                final View dialogView = inflater.inflate(R.layout.alert_paper_topic, null);
+                dialogBuilder.setView(dialogView);
+
+                final EditText edt = (EditText) dialogView.findViewById(R.id.paper_topic);
+
+                dialogBuilder.setTitle("Upload your Paper");
+                dialogBuilder.setMessage("Enter Your Paper Topic:");
+                dialogBuilder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        paperTopic=edt.getText().toString();
+                        uploadMultipart();
+                        dialog.dismiss();
+
+                    }
+                });
+                dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        dialog.cancel();
+                    }
+                });
+                AlertDialog b = dialogBuilder.create();
+                b.show();
                 break;
             case R.id.btnRegister:
                 CustomDialog cdd = new CustomDialog(getActivity());
@@ -157,6 +181,7 @@ public class PartRegFragment extends Fragment implements View.OnClickListener{
                 cdd.setPaper(paper);
                 cdd.show();
                 readCond = cdd.isReadCond();
+                break;
             case R.id.btnSelect:
                 showFileChooser();
                 break;
@@ -166,9 +191,6 @@ public class PartRegFragment extends Fragment implements View.OnClickListener{
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setDataAndType(Uri.parse(googleDocsUrl ), "text/html");
                 startActivity(intent);
-                break;
-            default:
-
                 break;
         }
     }
