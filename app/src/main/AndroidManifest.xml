@@ -22,11 +22,12 @@
         <activity android:name=".basic.UserActivity" />
         <activity android:name=".basic.MainActivity" />
         <activity android:name=".basic.ListOfConfActivity" />
-        <activity android:name=".basic.LoginActivity"></activity>
+        <activity android:name=".basic.LoginActivity" />
         <activity
             android:name=".basic.ConferenceActivity"
             android:label="@string/title_activity_conference"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".basic.VolunteerActivity"></activity>
     </application>
 
 </manifest>

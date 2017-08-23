@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_volunteer_conf"
+            android:icon="@drawable/ic_event_black_24dp"
+            android:title="My Conferences" />
+        <item
+            android:id="@+id/nav_volunteer_messages"
+            android:icon="@drawable/ic_event_available_black_24dp"
+            android:title="Messages"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent" />
+        <item
+            android:id="@+id/nav_volunteer_account"
+            android:icon="@drawable/ic_person_black_24dp"
+            android:title="Account Details" />
+
+        <item
+            android:id="@+id/nav_volunteer_settings"
+            android:icon="@drawable/ic_insert_drive_file_black_24dp"
+            android:title="Settings" />
+
+        <item
+            android:id="@+id/nav_volunteer_logout"
+            android:icon="@drawable/ic_lock_open_black_24dp"
+            android:title="@string/nav_logout"/>
+    </group>
+</menu>

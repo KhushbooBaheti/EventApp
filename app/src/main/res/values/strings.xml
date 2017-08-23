@@ -43,4 +43,5 @@
         <item>Presenter Registration</item>
         <item>Enquiry</item>
     </string-array>
+    <string-array name="nav_item_volunteer_titles"><item>My Conferences</item><item>Messages</item><item>Account</item><item>Settings</item><item>Logout</item></string-array>
 </resources>
