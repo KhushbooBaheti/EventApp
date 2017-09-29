@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -25,6 +26,7 @@ public class CustomDialog extends Dialog implements
     private Activity c;
     private Dialog d;
     private Button yes, no;
+    private EditText topicName;
     private CheckBox check;
     private boolean readCond = false;
     private String uid;
